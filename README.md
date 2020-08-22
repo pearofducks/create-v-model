@@ -1,5 +1,7 @@
 # create-v-model
 
+create v-model bindings quickly and easily - without having to remember which props to use
+
 ## install
 
 ```console
