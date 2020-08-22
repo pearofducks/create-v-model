@@ -1,6 +1,6 @@
 {
   "name": "create-v-model",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "create v-model bindings quickly and easily - without having to remember which props to use",
   "files": [
     "dist/"
