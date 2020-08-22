@@ -24,16 +24,16 @@ export const modelProps = (opts = {}) => ({
   modelValue: opts.modelType || null,
   modelModifiers: {
     type: Object,
-    default: opts.modelModifierDefault || (() => ({}))
+    default: opts.modelModifiersDefault || (() => ({}))
   },
   'onUpdate:modelValue': Function,
 })
 
-export const namedModelProps = (modelName, opts = {}) => ({
+export const namedModelProps = (modelName) => (opts = {}) => ({
   [modelName]: opts.modelType || null,
   [`${modelName}Modifiers`]: {
     type: Object,
-    default: opts.modelModifierDefault || (() => ({}))
+    default: opts.modelModifiersDefault || (() => ({}))
   },
   [`onUpdate:${modelName}`]: Function,
 })
