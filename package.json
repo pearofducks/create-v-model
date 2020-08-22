@@ -7,10 +7,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/pearofducks/v-model"
+    "url": "https://github.com/pearofducks/create-v-model"
   },
-  "main": "dist/v-model.cjs.js",
-  "module": "dist/v-model.esm.js",
+  "main": "dist/create-v-model.cjs.js",
+  "module": "dist/create-v-model.esm.js",
   "sideEffects": false,
   "scripts": {
     "build": "rollup -c",
