@@ -1,7 +1,8 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3.0 + Vite" v-model:foo.bar="llama" />
-  <code>{{ llama }}</code>
+  <HelloWorld msg="Hello Vue 3.0 + Vite" v-model="normal" v-model:llama="llama" />
+  <p><pre><code>normal:{{ normal }}</code></pre></p>
+  <p><pre><code>llama:{{ llama }}</code></pre></p>
 </template>
 
 <script>
@@ -15,6 +16,7 @@ export default {
   },
   setup() {
     return {
+      normal: ref(''),
       llama: ref('')
     }
   }
