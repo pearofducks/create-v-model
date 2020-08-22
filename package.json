@@ -16,11 +16,17 @@
     "build": "rollup -c",
     "preversion": "npm run build",
     "version": "npm publish --access public",
-    "postversion": "git push --follow-tags"
+    "postversion": "git push --follow-tags",
+    "test": "uvu -r esm -r browser-env/register test"
   },
   "author": "Dave Honneffer <pearofducks@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "rollup": "^2.23.0"
+    "@vue/test-utils": "^2.0.0-beta.2",
+    "browser-env": "^3.3.0",
+    "esm": "^3.2.25",
+    "rollup": "^2.23.0",
+    "uvu": "^0.3.3",
+    "vue": "^3.0.0-rc.7"
   }
 }
