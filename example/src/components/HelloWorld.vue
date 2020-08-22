@@ -7,17 +7,18 @@
 
 <script>
 import { ref } from 'vue'
-import { createModel, modelProps } from '../vmodel.js'
+import { createModel, createNamedModel, namedModelProps, modelProps } from '../vmodel.js'
 
 export default {
   name: 'HelloWorld',
   props: {
     msg: String,
-    ...modelProps()
+    ...modelProps(),
+    ...namedModelProps('foo')
   },
-  setup(props) {
+  setup(props, { attrs }) {
     const count = ref(0)
-    const model = createModel(props)
+    const model = createNamedModel('foo')(props)
 
     return { count, model }
   }

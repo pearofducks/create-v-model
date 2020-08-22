@@ -1,6 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3.0 + Vite" v-model="llama" />
+  <HelloWorld msg="Hello Vue 3.0 + Vite" v-model:foo.bar="llama" />
   <code>{{ llama }}</code>
 </template>
 
