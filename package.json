@@ -1,0 +1,26 @@
+{
+  "name": "create-v-model",
+  "version": "0.1.0",
+  "description": "a Vue 3 v-model helper",
+  "files": [
+    "dist/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pearofducks/v-model"
+  },
+  "main": "dist/v-model.cjs.js",
+  "module": "dist/v-model.esm.js",
+  "sideEffects": false,
+  "scripts": {
+    "build": "rollup -c",
+    "preversion": "npm run build",
+    "version": "npm publish --access public",
+    "postversion": "git push --follow-tags"
+  },
+  "author": "Dave Honneffer <pearofducks@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "rollup": "^2.23.0"
+  }
+}
