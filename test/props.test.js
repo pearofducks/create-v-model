@@ -5,7 +5,7 @@ import { modelProps, namedModelProps } from '../index'
 
 const test = suite('props')
 
-const createBasicComponent = props => ({
+const createComponent = props => ({
   template: '<p>{{ $props.modelValue }}</p>', // we use $props here to avoid a Vue warning
   props
 })
@@ -13,7 +13,7 @@ const createBasicComponent = props => ({
 test('normal model props', () => {
   const modelValue = 'value'
   const cb = () => {}
-  const component = createBasicComponent(modelProps())
+  const component = createComponent(modelProps())
   const wrapper = mount(component, {
     props: {
       modelValue,
@@ -30,7 +30,7 @@ test('normal model props', () => {
 test('named model props', () => {
   const foo = 'value'
   const cb = () => {}
-  const component = createBasicComponent(namedModelProps('foo')())
+  const component = createComponent(namedModelProps('foo')())
   const wrapper = mount(component, {
     props: {
       foo,

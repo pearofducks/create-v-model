@@ -6,7 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "create-v-model": "^0.2.3",
+    "create-v-model": "^1.0.0",
     "vue": "^3.0.0-rc.1"
   },
   "devDependencies": {
