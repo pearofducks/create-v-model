@@ -98,7 +98,7 @@ const createFooModel = createNamedModel('foo')
 
 export default {
   setup: (props) => ({
-    fooModel: createFooModel()
+    fooModel: createFooModel(props)
   })
 }
 ```
