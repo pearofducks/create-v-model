@@ -9,24 +9,30 @@
     "type": "git",
     "url": "https://github.com/pearofducks/create-v-model"
   },
-  "main": "dist/create-v-model.cjs.js",
-  "module": "dist/create-v-model.esm.js",
+  "type": "module",
+  "main": "dist/create-v-model.cjs",
+  "module": "dist/create-v-model.js",
+  "exports": {
+    "import": "dist/create-v-model.js",
+    "require": "dist/create-v-model.cjs"
+  },
   "sideEffects": false,
   "scripts": {
     "build": "rollup -c",
     "preversion": "npm run build",
     "version": "npm publish --access public",
     "postversion": "git push --follow-tags",
-    "test": "uvu -r esm -r browser-env/register test"
+    "test": "uvu test"
   },
   "author": "Dave Honneffer <pearofducks@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@vue/test-utils": "^2.0.0-beta.8",
-    "browser-env": "^3.3.0",
-    "esm": "^3.2.25",
-    "rollup": "^2.33.1",
-    "uvu": "^0.4.0",
-    "vue": "^3.0.2"
+    "@vue/test-utils": "^2.0.0-beta.13",
+    "abdomen": "^0.9.1",
+    "jsdom": "^16.4.0",
+    "rollup": "^2.35.1",
+    "sinon": "^9.2.2",
+    "uvu": "^0.5.1",
+    "vue": "^3.0.4"
   }
 }

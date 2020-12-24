@@ -1,11 +1,12 @@
+import 'abdomen/setup'
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 import { mount } from '@vue/test-utils'
-import { modelProps, namedModelProps } from '../index'
+import { modelProps } from '../index.js'
 
 const test = suite('props')
 
-const createComponent = props => ({
+const createComponent = ({ props }) => ({
   template: '<p>{{ $props.modelValue }}</p>', // we use $props here to avoid a Vue warning
   props
 })
@@ -13,7 +14,9 @@ const createComponent = props => ({
 test('normal model props', () => {
   const modelValue = 'value'
   const cb = () => {}
-  const component = createComponent(modelProps())
+  const component = createComponent({
+    props: modelProps()
+  })
   const wrapper = mount(component, {
     props: {
       modelValue,
@@ -30,7 +33,9 @@ test('normal model props', () => {
 test('named model props', () => {
   const foo = 'value'
   const cb = () => {}
-  const component = createComponent(namedModelProps('foo')())
+  const component = createComponent({
+    props: modelProps({ modelName: 'foo' })
+  })
   const wrapper = mount(component, {
     props: {
       foo,

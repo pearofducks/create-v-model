@@ -3,8 +3,8 @@ const pkg = require('./package.json')
 export default {
   input: 'index.js',
   output: [
-    { file: pkg.main, format: 'cjs' },
-    { file: pkg.module, format: 'esm' }
+    { file: pkg.exports.require, format: 'cjs' },
+    { file: pkg.exports.import, format: 'esm' }
   ],
   external: ['vue']
 }

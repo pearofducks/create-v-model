@@ -1,39 +1,29 @@
 import { computed } from 'vue'
 
-export const createModel = (props) => computed({
-  get: () => props.modelValue,
-  set: v => props['onUpdate:modelValue'](v)
-})
+const createEmitter = (emit, modelName) => v => emit(`update:${modelName}`, v)
+const getModifierName = modelName => modelName === 'modelValue' ? 'modelModifiers' : `${modelName}Modifiers`
+const getOnUpdateName = modelName => `onUpdate:${modelName}`
+const emptyObjectFactory = () => ({})
 
-export const createModifierModel = (modifier) => (props) => computed({
-  get: () => props.modelValue,
-  set: v => props['onUpdate:modelValue'](modifier(v, props.modelModifiers))
-})
+export const createModelFactory = ({ modelName = 'modelValue', modifier } = {}) => {
+  return ({ props, emit } = {}) => {
+    const setter = emit ? createEmitter(emit, modelName) : props[getOnUpdateName(modelName)]
+    const modifierName = getModifierName(modelName)
 
-export const createNamedModel = (modelName) => (props) => computed({
-  get: () => props[modelName],
-  set: v => props[`onUpdate:${modelName}`](v)
-})
+    return computed({
+      get: () => props[modelName],
+      set: v => setter(modifier ? modifier(v, props[modifierName]) : v)
+    })
+  }
+}
 
-export const createNamedModifierModel = (modelName, modifier) => (props) => computed({
-  get: () => props[modelName],
-  set: v => props[`onUpdate:${modelName}`](modifier(v, props.modelModifiers))
-})
+export const createModel = ({ props, emit, modelName = 'modelValue', modifier } = {}) => createModelFactory({ modelName, modifier })({ props, emit })
 
-export const modelProps = (opts = {}) => ({
-  modelValue: opts.modelType || null,
-  modelModifiers: {
+export const modelProps = ({ modelName = 'modelValue', modelType = null, modifierDefault = emptyObjectFactory } = {}) => ({
+  [modelName]: modelType,
+  [getModifierName(modelName)]: {
     type: Object,
-    default: opts.modelModifiersDefault || (() => ({}))
+    default: modifierDefault
   },
-  'onUpdate:modelValue': Function,
-})
-
-export const namedModelProps = (modelName) => (opts = {}) => ({
-  [modelName]: opts.modelType || null,
-  [`${modelName}Modifiers`]: {
-    type: Object,
-    default: opts.modelModifiersDefault || (() => ({}))
-  },
-  [`onUpdate:${modelName}`]: Function,
+  [getOnUpdateName(modelName)]: Function
 })
