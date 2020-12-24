@@ -43,9 +43,9 @@ props: {
 }
 ```
 
-**modelName**: the name of the model; leave this as the default for plain `v-model`, and otherwise give it the `NAME` in `v-model:NAME`
-**modelType**: an optional type to specify the model should be
-**modifierDefault**: an optional alternative default for the _modelModifiers_ prop (or equivalent for named models)
+- **modelName**: the name of the model; leave this as the default for plain `v-model`, and otherwise give it the `NAME` in `v-model:NAME`
+- **modelType**: an optional type to specify the model should be
+- **modifierDefault**: an optional alternative default for the _modelModifiers_ prop (or equivalent for named models)
 
 ### createModel
 
@@ -62,10 +62,10 @@ setup: (props, { emit }) => ({
 })
 ```
 
-**props**: the props from setup - this is required
-**emit**: if emit is provided, then Vue's built-in modifiers (`trim` and `number`) will be enabled - and events will be emitted for updates instead of directly calling the relevant `onUpdate` function directly
-**modelName**: the name of the model; leave this as the default for plain `v-model`, and otherwise give it the `NAME` in `v-model:NAME`
-**modifier**: a function of the form below, this will be called whenever the model would call `set`
+- **props**: the props from setup - this is required
+- **emit**: if emit is provided, then Vue's built-in modifiers (`trim` and `number`) will be enabled - and events will be emitted for updates instead of directly calling the relevant `onUpdate` function directly
+- **modelName**: the name of the model; leave this as the default for plain `v-model`, and otherwise give it the `NAME` in `v-model:NAME`
+- **modifier**: a function of the form below, this will be called whenever the model would call `set`
   - `(value: typeof modelType, modelModifiersObject: object) => typeof modelType`
 
 
