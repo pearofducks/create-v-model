@@ -38,7 +38,7 @@ props: {
   ...modelProps({
     modelName: string = 'modelValue',
     modelType: any = null,
-    modifierDefault: any = (() => ({})) // but you probably want an object factory here of some form
+    modifierDefault: any = (() => ({}))
   })
 }
 ```
