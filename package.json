@@ -13,8 +13,8 @@
   "main": "dist/create-v-model.cjs",
   "module": "dist/create-v-model.js",
   "exports": {
-    "import": "dist/create-v-model.js",
-    "require": "dist/create-v-model.cjs"
+    "import": "./dist/create-v-model.js",
+    "require": "./dist/create-v-model.cjs"
   },
   "sideEffects": false,
   "scripts": {
