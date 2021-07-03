@@ -12,14 +12,16 @@
   "type": "module",
   "main": "dist/create-v-model.cjs",
   "module": "dist/create-v-model.js",
+  "types": "./types/index.d.ts",
   "exports": {
     "import": "./dist/create-v-model.js",
     "require": "./dist/create-v-model.cjs"
   },
   "sideEffects": false,
   "scripts": {
+    "types": "tsc",
     "build": "rollup -c",
-    "preversion": "npm run build",
+    "preversion": "npm run types && npm run build",
     "version": "npm publish --access public",
     "postversion": "git push --follow-tags",
     "test": "uvu test"
@@ -32,6 +34,7 @@
     "jsdom": "^16.4.0",
     "rollup": "^2.35.1",
     "sinon": "^9.2.2",
+    "typescript": "^4.3.5",
     "uvu": "^0.5.1",
     "vue": "^3.0.4"
   }
