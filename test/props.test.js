@@ -30,6 +30,15 @@ test('normal model props', () => {
   assert.equal(wrapper.props('modelModifiers'), {})
 })
 
+test('default value for prop', () => {
+  const modelDefault = Symbol()
+  const component = createComponent({
+    props: modelProps({ modelDefault })
+  })
+  const wrapper = mount(component)
+  assert.is(wrapper.props('modelValue'), modelDefault)
+})
+
 test('named model props', () => {
   const foo = 'value'
   const cb = () => {}

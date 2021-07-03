@@ -19,8 +19,11 @@ export const createModelFactory = ({ modelName = 'modelValue', modifier } = {}) 
 
 export const createModel = ({ props, emit, modelName = 'modelValue', modifier } = {}) => createModelFactory({ modelName, modifier })({ props, emit })
 
-export const modelProps = ({ modelName = 'modelValue', modelType = null, modifierDefault = emptyObjectFactory } = {}) => ({
-  [modelName]: modelType,
+export const modelProps = ({ modelName = 'modelValue', modelType = null, modelDefault, modifierDefault = emptyObjectFactory } = {}) => ({
+  [modelName]: {
+    type: modelType,
+    default: modelDefault
+  },
   [getModifierName(modelName)]: {
     type: Object,
     default: modifierDefault
