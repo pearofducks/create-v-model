@@ -38,6 +38,7 @@ props: {
   ...modelProps({
     modelName: string = 'modelValue',
     modelType: any = null,
+    modelDefault: any,
     modifierDefault: any = (() => ({}))
   })
 }
@@ -45,6 +46,7 @@ props: {
 
 - **modelName**: the name of the model; leave this as the default for plain `v-model`, and otherwise give it the `NAME` in `v-model:NAME`
 - **modelType**: an optional type to specify the model should be
+- **modelDefault**: an optional value to specify the intial value of the model (typically used for [absent prop detection](https://github.com/vuejs/vue-next/blob/master/CHANGELOG.md#310-2021-06-07))
 - **modifierDefault**: an optional alternative default for the _modelModifiers_ prop (or equivalent for named models)
 
 ### createModel
