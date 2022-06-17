@@ -4,7 +4,7 @@ import * as assert from 'uvu/assert'
 import sinon from 'sinon'
 import { ref, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
-import { modelProps, createModel, createModelFactory } from '../index.js'
+import { modelProps, createModel } from '../index.js'
 
 const test = suite('model')
 
@@ -30,10 +30,10 @@ test('normal model creation', async () => {
       'onUpdate:modelValue': modelUpdater
     }
   })
-  assert.is(wrapper.props('modelValue'), 'foo')
+  assert.is(wrapper.props('modelValue').value, 'foo')
   wrapper.componentVM.model = 'bar'
   await nextTick()
-  assert.is(wrapper.props('modelValue'), 'bar')
+  assert.is(wrapper.props('modelValue').value, 'bar')
 })
 
 test('normal model update via emit', async () => {
@@ -48,10 +48,10 @@ test('normal model update via emit', async () => {
       'onUpdate:modelValue': modelUpdater
     }
   })
-  assert.is(wrapper.props('modelValue'), 'foo')
+  assert.is(wrapper.props('modelValue').value, 'foo')
   wrapper.componentVM.model = 'bar'
   await nextTick()
-  assert.is(wrapper.props('modelValue'), 'bar')
+  assert.is(wrapper.props('modelValue').value, 'bar')
 })
 
 test('emitter', async () => {
@@ -88,14 +88,14 @@ test('modifier model creation', async () => {
       'onUpdate:modelValue': modelUpdater
     }
   })
-  assert.is(wrapper.props('modelValue'), 'foo')
+  assert.is(wrapper.props('modelValue').value, 'foo')
   wrapper.componentVM.model = 'bar'
   await nextTick()
-  assert.is(wrapper.props('modelValue'), 'bar')
+  assert.is(wrapper.props('modelValue').value, 'bar')
   modelModifiers.value.change = true
   wrapper.componentVM.model = 'baz'
   await nextTick()
-  assert.is(wrapper.props('modelValue'), 'change')
+  assert.is(wrapper.props('modelValue').value, 'baz')
 })
 
 test('named model creation', async () => {
@@ -110,10 +110,10 @@ test('named model creation', async () => {
       'onUpdate:foo': modelUpdater
     }
   })
-  assert.is(wrapper.props('foo'), 'foo')
+  assert.is(wrapper.props('foo').value, 'foo')
   wrapper.componentVM.model = 'bar'
   await nextTick()
-  assert.is(wrapper.props('foo'), 'bar')
+  assert.is(wrapper.props('foo').value, 'bar')
 })
 
 test.run()
