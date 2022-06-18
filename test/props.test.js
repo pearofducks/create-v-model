@@ -1,10 +1,13 @@
-import 'abdomen/setup'
+import { GlobalRegistrator } from './_setup.js'
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 import { mount } from '@vue/test-utils'
 import { modelProps } from '../index.js'
 
 const test = suite('props')
+// test.after(async () => {
+//   GlobalRegistrator.unregister()
+// })
 
 const createComponent = ({ props }) => ({
   template: '<p>{{ $props.modelValue }}</p>', // we use $props here to avoid a Vue warning
