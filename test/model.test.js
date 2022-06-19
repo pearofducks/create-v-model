@@ -1,4 +1,4 @@
-import { GlobalRegistrator } from './_setup.js'
+import './_setup.js'
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 import sinon from 'sinon'

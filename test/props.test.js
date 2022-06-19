@@ -1,7 +1,7 @@
-import { GlobalRegistrator } from './_setup.js'
+import './_setup.js'
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { mount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import { modelProps } from '../index.js'
 
 const test = suite('props')
@@ -20,7 +20,7 @@ test('normal model props', () => {
   const component = createComponent({
     props: modelProps()
   })
-  const wrapper = mount(component, {
+  const wrapper = shallowMount(component, {
     props: {
       modelValue,
       'onUpdate:modelValue': cb
@@ -38,7 +38,7 @@ test('default value for prop', () => {
   const component = createComponent({
     props: modelProps({ modelDefault })
   })
-  const wrapper = mount(component)
+  const wrapper = shallowMount(component)
   assert.is(wrapper.props('modelValue'), modelDefault)
 })
 
@@ -48,7 +48,7 @@ test('named model props', () => {
   const component = createComponent({
     props: modelProps({ modelName: 'foo' })
   })
-  const wrapper = mount(component, {
+  const wrapper = shallowMount(component, {
     props: {
       foo,
       'onUpdate:foo': cb
