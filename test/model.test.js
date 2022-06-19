@@ -7,9 +7,9 @@ import { shallowMount } from '@vue/test-utils'
 import { modelProps, createModel } from '../index.js'
 
 const test = suite('model')
-// test.after(async () => {
-//   GlobalRegistrator.unregister()
-// })
+test.after(() => {
+  window.happyDOM.cancelAsync()
+})
 
 const createComponent = ({ props, setup }) => ({ template: '<p>unused</p>', props, setup })
 const getModelFixtures = () => {
@@ -112,5 +112,6 @@ test('named model creation', async () => {
   wrapper.componentVM.model = 'bar'
   assert.is(wrapper.props('foo').value, 'bar')
 })
+
 
 test.run()

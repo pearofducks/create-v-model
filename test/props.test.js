@@ -5,9 +5,9 @@ import { mount } from '@vue/test-utils'
 import { modelProps } from '../index.js'
 
 const test = suite('props')
-// test.after(async () => {
-//   GlobalRegistrator.unregister()
-// })
+test.after(() => {
+  window.happyDOM.cancelAsync()
+})
 
 const createComponent = ({ props }) => ({
   template: '<p>{{ $props.modelValue }}</p>', // we use $props here to avoid a Vue warning

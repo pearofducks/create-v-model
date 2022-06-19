@@ -25,7 +25,7 @@
     "preversion": "npm run types && npm run build",
     "version": "npm publish --access public",
     "postversion": "git push --follow-tags",
-    "test": "NODE_ENV=production uvu test"
+    "test": "node test"
   },
   "author": "Dave Honneffer <pearofducks@gmail.com>",
   "license": "MIT",
