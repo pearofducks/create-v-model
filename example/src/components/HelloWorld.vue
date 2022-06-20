@@ -6,19 +6,20 @@
 
 <script>
 import { ref } from 'vue'
-import { createModel, modelProps } from '/@createVModel/index.js'
+import { createModel, modelProps, modelEmits } from '/@createVModel/index.js'
 
 export default {
   name: 'HelloWorld',
+  emits: modelEmits(),
   props: {
     msg: String,
     ...modelProps(),
     ...modelProps({ modelName: 'llama' })
   },
-  setup(props, { attrs }) {
+  setup(props, { emit }) {
     const count = ref(0)
-    const model = createModel({ props })
-    const llamaModel = createModel({ props, modelName: 'llama' })
+    const model = createModel({ props, emit })
+    const llamaModel = createModel({ props, emit, modelName: 'llama' })
 
     return { count, model, llamaModel }
   }
