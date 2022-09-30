@@ -67,3 +67,12 @@ export function modelProps({ modelName = 'modelValue', modelType = null, modelDe
     [getOnUpdateName(modelName)]: Function
   }
 }
+
+/**
+ * @arg {object} args
+ * @arg {string} [args.modelName = 'modelValue'] - the NAME of the model in v-model:NAME
+ * @returns {Array<string>} - emits specification
+ */
+export function modelEmits({ modelName = 'modelValue' } = {}) {
+  return [`update:${modelName}`]
+}

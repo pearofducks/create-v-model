@@ -1,12 +1,15 @@
-import 'abdomen/setup'
+import './_setup.js'
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 import sinon from 'sinon'
-import { ref, nextTick } from 'vue'
-import { mount } from '@vue/test-utils'
-import { modelProps, createModel, createModelFactory } from '../index.js'
+import { ref } from 'vue'
+import { shallowMount } from '@vue/test-utils'
+import { modelProps, createModel } from '../index.js'
 
 const test = suite('model')
+test.after(() => {
+  window.happyDOM.cancelAsync()
+})
 
 const createComponent = ({ props, setup }) => ({ template: '<p>unused</p>', props, setup })
 const getModelFixtures = () => {
@@ -24,16 +27,15 @@ test('normal model creation', async () => {
     props: modelProps(),
     setup: (p) => ({ model: createModel({ props: p }) })
   })
-  const wrapper = mount(component, {
+  const wrapper = shallowMount(component, {
     props: {
       modelValue,
       'onUpdate:modelValue': modelUpdater
     }
   })
-  assert.is(wrapper.props('modelValue'), 'foo')
+  assert.is(wrapper.props('modelValue').value, 'foo')
   wrapper.componentVM.model = 'bar'
-  await nextTick()
-  assert.is(wrapper.props('modelValue'), 'bar')
+  assert.is(wrapper.props('modelValue').value, 'bar')
 })
 
 test('normal model update via emit', async () => {
@@ -42,16 +44,15 @@ test('normal model update via emit', async () => {
     props: modelProps(),
     setup: (p, { emit }) => ({ model: createModel({ props: p, emit }) })
   })
-  const wrapper = mount(component, {
+  const wrapper = shallowMount(component, {
     props: {
       modelValue,
       'onUpdate:modelValue': modelUpdater
     }
   })
-  assert.is(wrapper.props('modelValue'), 'foo')
+  assert.is(wrapper.props('modelValue').value, 'foo')
   wrapper.componentVM.model = 'bar'
-  await nextTick()
-  assert.is(wrapper.props('modelValue'), 'bar')
+  assert.is(wrapper.props('modelValue').value, 'bar')
 })
 
 test('emitter', async () => {
@@ -61,14 +62,13 @@ test('emitter', async () => {
     props: modelProps(),
     setup: (p) => ({ model: createModel({ props: p, emit: emitter }) })
   })
-  const wrapper = mount(component, {
+  const wrapper = shallowMount(component, {
     props: {
       modelValue,
       'onUpdate:modelValue': modelUpdater
     }
   })
   wrapper.componentVM.model = 'bar'
-  await nextTick()
   assert.is(emitter.callCount, 1)
   assert.is(emitter.firstArg, 'update:modelValue')
   assert.is(emitter.lastArg, 'bar')
@@ -81,21 +81,19 @@ test('modifier model creation', async () => {
     setup: (p) => ({ model: createModel({ props: p, modifier: cb }) })
   })
   const { modelValue, modelUpdater, modelModifiers } = getModelFixtures()
-  const wrapper = mount(component, {
+  const wrapper = shallowMount(component, {
     props: {
       modelValue,
       modelModifiers,
       'onUpdate:modelValue': modelUpdater
     }
   })
-  assert.is(wrapper.props('modelValue'), 'foo')
+  assert.is(wrapper.props('modelValue').value, 'foo')
   wrapper.componentVM.model = 'bar'
-  await nextTick()
-  assert.is(wrapper.props('modelValue'), 'bar')
+  assert.is(wrapper.props('modelValue').value, 'bar')
   modelModifiers.value.change = true
   wrapper.componentVM.model = 'baz'
-  await nextTick()
-  assert.is(wrapper.props('modelValue'), 'change')
+  assert.is(wrapper.props('modelValue').value, 'baz')
 })
 
 test('named model creation', async () => {
@@ -104,16 +102,16 @@ test('named model creation', async () => {
     setup: (p) => ({ model: createModel({ props: p, modelName: 'foo' }) })
   })
   const { modelValue, modelUpdater } = getModelFixtures()
-  const wrapper = mount(component, {
+  const wrapper = shallowMount(component, {
     props: {
       foo: modelValue,
       'onUpdate:foo': modelUpdater
     }
   })
-  assert.is(wrapper.props('foo'), 'foo')
+  assert.is(wrapper.props('foo').value, 'foo')
   wrapper.componentVM.model = 'bar'
-  await nextTick()
-  assert.is(wrapper.props('foo'), 'bar')
+  assert.is(wrapper.props('foo').value, 'bar')
 })
+
 
 test.run()
